@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TO-DO List App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="todo-app">
+      <h2>To-Do List <img src="https://tse2.mm.bing.net/th?id=OIP.xpZGQSczA7qFR7PMt1xFAgHaH6&pid=Api&P=0&h=180"></h2>
+      <div class="row">
+        <input type="text" id="input-box" placeholder="Add your text">
+        <button onclick="addTask()">Add</button>
+      </div>
+      <ul id="list-container">
+        <!-- Tasks will be added here -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const inputBox = document.getElementById("input-box");
+    const listContainer = document.getElementById("list-container");
+
+    function addTask() {
+      if (inputBox.value === '') {
+        alert("You must write something!");
+      } else {
+        let li = document.createElement("li");
+        li.textContent = inputBox.value;
+        
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        span.classList.add("close");
+        li.appendChild(span);
+        
+        listContainer.appendChild(li);
+      }
+      inputBox.value = ''; 
+    }
+
+    listContainer.addEventListener("click", function (e) {
+      if (e.target.tagName === "LI") {
+        e.target.classList.toggle("checked");
+      } else if (e.target.classList.contains("close")) {
+        e.target.parentElement.remove();
+      }
+    }, false);
+  </script>
+</body>
+</html>
